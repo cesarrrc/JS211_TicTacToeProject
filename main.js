@@ -2,6 +2,7 @@
 
 // brings in the assert module for unit testing
 const assert = require('assert');
+const { BADRESP } = require('dns');
 // brings in the readline module to access the command line
 const readline = require('readline');
 // use the readline module to print out to the command line
@@ -34,23 +35,60 @@ const printBoard = () => {
 
 const horizontalWin = () => {
   // Your code here to check for horizontal wins
+for (let i = 0; i < board.length; i++)  {
+  if (board[0][i] == board[1][i] == board[2][i]) {
+    return true
+    }
+  }
+  return false;
 }
 
 const verticalWin = () => {
   // Your code here to check for vertical wins
+  for (let i = 0; i < board.length; i++)  {
+    if (board[i][0] == board[i][1] == board[i][2]) {
+      return true
+      }
+    }
+    return false;
 }
 
 const diagonalWin = () => {
   // Your code here to check for diagonal wins
+  for (let i = 0; i < board.length; i++)  {
+    if (board[0][0] == board[1][1] == board[2][2] || board[0][2] == board[1][1] == board[2][0]) {
+      return true
+      }
+    }
+    return false;
 }
+
 
 const checkForWin = () => {
   // Your code here call each of the check for types of wins
+  if (horizontalWin())  {
+    return true
+  }
+  if (verticalWin())  {
+    return true
+  }
+  if (diagonalWin())  {
+    return true
+  }
+  return false
 }
 
 const ticTacToe = (row, column) => {
-  // Your code here to place a marker on the board
-  // then check for a win
+    // Your code here to place a marker on the board
+  board[row][column] = playerTurn
+    // then check for a win
+  if (checkForWin()) {
+    console.log(`Congratulation! ${playerTurn} won!`)
+  } if (playerTurn === 'X') {
+    playerTurn = 'O'
+  } else {
+    playerTurn = 'X'
+  }
 }
 
 const getPrompt = () => {
